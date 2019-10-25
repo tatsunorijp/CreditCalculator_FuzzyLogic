@@ -13,32 +13,37 @@ VAR_OUTPUT				// Define output variable
 END_VAR
 
 FUZZIFY salary			// low, medium, high
-	TERM low := trape 0 0 5000 10000;
-	TERM medium := 7500 10000 15000;
-	TERM high := 10000 15000 20000 20000;
+	TERM low := trape 0 0 5000 7500;
+	TERM medium := trian 5000 10000 15000;
+	TERM high := trape 12500 15000 20000 20000;
 END_FUZZIFY
 
-FUZZIFY food			// Fuzzify input variable 'food': { 'rancid', 'delicious' }
-	TERM rancid := (0, 1) (1, 1) (3,0) ;
-	TERM delicious := (7,0) (9,1);
+FUZZIFY companyYears
+    TERM low := trape 0 0 2.5 4;
+    TERM medium := trian 3 5 7;
+    TERM high := trape 6 7.5 10 10;
 END_FUZZIFY
 
-DEFUZZIFY tip			// Defzzzify output variable 'tip' : {'cheap', 'average', 'generous' }
-	TERM cheap := (0,0) (5,1) (10,0);
-	TERM average := (10,0) (15,1) (20,0);
-	TERM generous := (20,0) (25,1) (30,0);
-	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
-	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
+FUZZIFY patrimonyValue
+    TERM low := trian 0 0 200000;
+    TERM medium := trape 150000 250000 350000 450000;
+    TERM high := trian 400000 600000 600000;
+END_FUZZIFY
+
+FUZZIFY serasaPontuation
+    TERM low := trape 0 0 300 650;
+    TERM medium := trian 550 700 800;
+    TERM high := trape 750 850 1000 1000;
+END_FUZZIFY
+
+DEFUZZIFY creditValue
+    TERM rejected := trape 0 0 1000 1000;
+    TERM low := trape 1000 1000 2500 4000;
+    TERM medium :=  trian 3500 5000 6500;
+    TERM high := trape 6000 7500 10000 10000;
+
+	METHOD: COG;
+	DEFAULT := 0;
 END_DEFUZZIFY
-
-RULEBLOCK No1
-	AND : MIN;			// Use 'min' for 'and' (also implicit use 'max' for 'or' to fulfill DeMorgan's Law)
-	ACT : MIN;			// Use 'min' activation method
-	ACCU : MAX;			// Use 'max' accumulation method
-
-	RULE 1 : IF service IS poor OR food IS rancid THEN tip IS cheap;
-	RULE 2 : IF service IS good THEN tip IS average;
-	RULE 3 : IF service IS excellent AND food IS delicious THEN tip IS generous;
-END_RULEBLOCK
 
 END_FUNCTION_BLOCK

@@ -9,7 +9,7 @@ public class Main {
 	// write your code here
 
         // Load from 'FCL' file
-        String fileName = "tipp.fcl";
+        String fileName = "fuzzy.fcl";
         FIS fis = FIS.load(fileName,true);
 
         // Error while loading?
@@ -22,17 +22,17 @@ public class Main {
         JFuzzyChart.get().chart(fis.getFunctionBlock("tipper"));
 
         // Set inputs
-        fis.setVariable("service", 3);
-        fis.setVariable("food", 7);
+        // fis.setVariable("service", 3);
+//        fis.setVariable("food", 7);
 
         // Evaluate
-        fis.evaluate();
+//        fis.evaluate();
 
         // Show output variable's chart
-        Variable tip = fis.getFunctionBlock("tipper").getVariable("tip");
-        JFuzzyChart.get().chart(tip, tip.getDefuzzifier(), true);
+//        Variable tip = fis.getFunctionBlock("tipper").getVariable("tip");
+//        JFuzzyChart.get().chart(tip, tip.getDefuzzifier(), true);
 
         // Print ruleSet
-        System.out.println(fis);
+//        System.out.println(fis);
     }
 }
