@@ -2,11 +2,9 @@ import net.sourceforge.jFuzzyLogic.*;
 import net.sourceforge.jFuzzyLogic.plot.JFuzzyChart;
 import net.sourceforge.jFuzzyLogic.rule.Variable;
 
-
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
 
         // Load from 'FCL' file
         String fileName = "fuzzy.fcl";
@@ -22,15 +20,18 @@ public class Main {
         JFuzzyChart.get().chart(fis.getFunctionBlock("tipper"));
 
         // Set inputs
-        // fis.setVariable("service", 3);
-//        fis.setVariable("food", 7);
+        fis.setVariable("salary", 5000);
+        fis.setVariable("variableSalary", 0);
+        fis.setVariable("companyYears", 1);
+        fis.setVariable("patrimonyValue", 50000);
+        fis.setVariable("serasaPontuation", 850);
 
         // Evaluate
-//        fis.evaluate();
+        fis.evaluate();
 
         // Show output variable's chart
-//        Variable tip = fis.getFunctionBlock("tipper").getVariable("tip");
-//        JFuzzyChart.get().chart(tip, tip.getDefuzzifier(), true);
+        Variable salaryValue = fis.getFunctionBlock("tipper").getVariable("creditValue");
+        JFuzzyChart.get().chart(salaryValue, salaryValue.getDefuzzifier(), true);
 
         // Print ruleSet
 //        System.out.println(fis);
