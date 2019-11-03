@@ -44,7 +44,7 @@ FUNCTION_BLOCK tipper	// Block definition (there may be more than one block per 
     END_FUZZIFY
 
     DEFUZZIFY creditValue
-        TERM rejected := trape 0 0 600 600;
+        TERM rejected := trape 0 0 999 999;
         TERM veryLow := trape 1000 1000 2000 3000;
         TERM low := trape 2000 3500 4500 5500;
         TERM mediumLow := trape 5000 7000 9000 10000;
